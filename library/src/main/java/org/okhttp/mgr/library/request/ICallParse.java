@@ -1,5 +1,7 @@
 package org.okhttp.mgr.library.request;
 
+import java.io.IOException;
+
 import okhttp3.Call;
 import okhttp3.Response;
 
@@ -8,5 +10,5 @@ import okhttp3.Response;
  */
 public interface ICallParse<T> {
 
-    T parse(Call call, Response response);
+    T parse(boolean isSuccess, Call call, Response response,IOException e);
 }

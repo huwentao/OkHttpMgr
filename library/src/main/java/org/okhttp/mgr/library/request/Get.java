@@ -6,7 +6,7 @@ import java.util.Set;
 /**
  * Created by huwentao on 16/10/8.
  */
-public class Get extends IRequsetImpl{
+public class Get extends HttpRequset {
 
     public Get(String requestUrl) {
         super(requestUrl);

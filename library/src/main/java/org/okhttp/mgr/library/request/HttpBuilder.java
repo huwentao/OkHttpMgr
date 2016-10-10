@@ -47,6 +47,7 @@ public class HttpBuilder {
     private CookieJar cookieJar;
     private SSLParams sslParams;
     private HostnameVerifier hostnameVerifier;
+    private ICallParse<?> defaultParse;
 
     private HttpBuilder() {
 
@@ -96,8 +97,13 @@ public class HttpBuilder {
     /**
      * 全局cookie存取规则
      */
-    public HttpBuilder setCookieStore(CookieJar cookieJar) {
+    public HttpBuilder cookieStore(CookieJar cookieJar) {
         this.cookieJar = cookieJar;
+        return this;
+    }
+
+    public HttpBuilder callParse(ICallParse<?> callParse) {
+        this.defaultParse = callParse;
         return this;
     }
 
@@ -139,7 +145,7 @@ public class HttpBuilder {
      * @param certificates     https的全局自签名证书
      * @return
      */
-    public HttpBuilder httpsConfig(HostnameVerifier hostnameVerifier,
+    public HttpBuilder https(HostnameVerifier hostnameVerifier,
                                    InputStream... certificates) {
         if (okHttpClient == null) {
             Log.e(Const.LOG_TAG, "请在Application中初始化HttpConfig");
@@ -159,7 +165,7 @@ public class HttpBuilder {
      * @param certificates     公钥证书
      * @return
      */
-    public HttpBuilder httpsConfig(HostnameVerifier hostnameVerifier,
+    public HttpBuilder https(HostnameVerifier hostnameVerifier,
                                    InputStream bksFile, String password,
                                    InputStream... certificates) {
         if (okHttpClient == null) {
@@ -324,4 +330,6 @@ public class HttpBuilder {
             return new X509Certificate[0];
         }
     }
+
+
 }
